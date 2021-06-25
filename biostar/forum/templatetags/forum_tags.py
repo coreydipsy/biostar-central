@@ -124,6 +124,11 @@ def gravatar(user=None, user_uid=None, size=80):
     return auth.gravatar(user=user, size=size)
 
 
+@register.filter
+def embed(text):
+    return markdown.parse(text, clean=True, escape=True)
+
+
 @register.inclusion_tag('widgets/filter_dropdown.html', takes_context=True)
 def filter_dropdown(context):
 
@@ -344,27 +349,6 @@ def file_tags_options(selected):
         opts = []
 
     return opts
-
-
-@register.inclusion_tag('forms/field_tags.html', takes_context=True)
-def tags_field(context, form_field, initial=''):
-    """Render multi-select dropdown options for tags. """
-
-    # Read from tags file
-    tags_file = getattr(settings, "TAGS_OPTIONS_FILE", None)
-    # Get currently selected tags from the post or request
-    selected = initial.split(",") if initial else []
-    selected = {(val, True) for val in selected}
-    if tags_file:
-        opts = file_tags_options(selected)
-    else:
-        opts = {}
-
-    options = itertools.chain(selected, opts)
-
-    context = dict(initial=initial, form_field=form_field, dropdown_options=options)
-
-    return context
 
 
 @register.inclusion_tag('forms/form_errors.html')
@@ -706,6 +690,8 @@ def post_boxclass(root_type, answer_count, root_has_accepted):
         style = "forum"
     elif root_type == Post.NEWS:
         style = "news"
+    elif root_type == Post.HERALD:
+        style = "herald"
     else:
         style = "question"
 
@@ -718,6 +704,14 @@ def post_boxclass(root_type, answer_count, root_has_accepted):
         modifier = "open"
 
     return f"{style} {modifier}"
+
+
+@register.inclusion_tag('herald/herald_item.html', takes_context=True)
+def herald_item(context, item):
+    request = context['request']
+    user = request.user
+    context = dict(story=item, request=request, user=user)
+    return context
 
 
 @register.simple_tag

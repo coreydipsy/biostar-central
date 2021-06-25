@@ -194,39 +194,48 @@ function activate_prism(elem) {
     Prism.highlightAll();
 }
 
-function tags_dropdown() {
 
-    $('.tags').dropdown({
-        allowAdditions: true,
-        // Get form field to add to
-        onChange: function (value, text, $selectedItem) {
-            // Get form field to add to
-            var field = $(this).find("select").data("value");
-            var tag_field = $('#{0}'.f(field));
-            // Add selected tag to field
-            // Set text instead of value
-            value = $('<div/>').text(value).html();
-            tag_field.val(value);
-        }
-    });
-    $('.tags > input.search').keydown(function (event) {
 
-        // Prevent submitting form when adding tag by pressing ENTER.
-        var ek = event.keyCode || event.which;
-        var value = $(this).val().trim();
+function herald_update(hpk, status, elem) {
 
-        // Get a list of delimiters
-        var delimiters = $('#field-tags').data('delimiters').split(',');
+    $.ajax('/herald/update/' + hpk + '/',
+        {
+            type: 'POST',
+            dataType: 'json',
+            ContentType: 'application/json',
+            data: {'status': status},
+            success: function (data) {
+                if (data.status === 'error') {
+                    popup_message(elem, data.msg, data.status, 1000);
+                } else {
+                    elem.html(data.tmpl);
+                    elem.attr('class', 'item herald ' + data.state)
+                    // Replace current item with the select one.
+                    // active.text($item.text());
+                }
+            },
+            error: function (xhr, status, text) {
+                error_message(elem, xhr, status, text)
+            }
+        })
 
-        if (delimiters.indexOf(String(ek)) !== -1) {
-            // Escape the text before settings value.
-            value = $('<div/>').text(value).html();
-            event.preventDefault();
-            $(this).closest('.tags').dropdown('set selected', value);
-            $(this).val('');
-            return value
-        }
-    })
+}
+
+function herald_subscribe(elem) {
+
+    $.ajax('/herald/subscribe/',
+        {
+            type: 'POST',
+            dataType: 'json',
+            ContentType: 'application/json',
+            data: {'status': status},
+            success: function (data) {
+                popup_message(elem, data.msg, data.status, 1000);
+            },
+            error: function (xhr, status, text) {
+                error_message(elem, xhr, status, text)
+            }
+        })
 
 }
 
@@ -347,8 +356,14 @@ $(document).ready(function () {
 
     $("[data-value='accept']").popup({
         on: 'hover',
-        content: 'Accept answer '
+        content: 'Accept'
     });
+
+     $("[data-value='decline']").popup({
+        on: 'hover',
+        content: 'Decline'
+    });
+
     $('.voting button').each(function (event) {
 
         var elem = $(this);
@@ -369,14 +384,20 @@ $(document).ready(function () {
         var elem = $(this);
         // Get errored out field id and label
         var field_id = elem.attr('data-value');
-        var field_label = elem.attr('label');
         // Get the error message
         var message = elem.attr("message");
         // Select field in the form using it's id
-        var field = $(field_id);
-        // Add an 'error' to '.ui.field' to turn it red.
-        field.closest(".field").addClass("error");
+
+        try {
+            var field = $(field_id);
+            // Add an 'error' to '.ui.field' to turn it red.
+            field.closest(".field").addClass("error");
+        } catch (err) {
+            field = $('#form-errors');
+        }
+
         // Insert the error message
+        message = $('<div/>').text(message).html();
         field.before('<div class="ui small red message"> {1}</div>'.f(field_label, message))
     });
 
@@ -387,7 +408,17 @@ $(document).ready(function () {
         $('.hidden-answer').toggle()
     });
 
-    tags_dropdown();
+
+    $(this).on('click', ".herald.item [data-value='accept'],[data-value='decline']", function (event) {
+        var elem = $(this).closest('.herald');
+        var hpk = elem.data('value');
+        var status = $(this).data('value');
+        herald_update(hpk, status, elem)
+    });
+
+    $(this).on('click', ".herald-sub", function (event) {
+        herald_subscribe($(this))
+    });
 
     $('pre').addClass('language-bash');
     $('code').addClass('language-bash');
