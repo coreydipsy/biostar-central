@@ -21,16 +21,16 @@
             <div class="menu">
 
                 <a class="ui item" href="{% url 'project_create' %}">
-                    <i class="circle plus icon"></i>新的專案
+                    <i class="circle plus icon"></i>New Project
                 </a>
 
                 {% if project and project|writable:user %}
                     <a class="item" href="{% url 'recipe_create' project.uid %}">
-                        <i class="settings icon"></i>步驟教學
+                        <i class="settings icon"></i>Create Recipe
                     </a>
 
                     <a class="item" href="{% url 'data_upload' project.uid %}">
-                        <i class="folder open icon"></i>上傳資料
+                        <i class="folder open icon"></i>Upload Data
                     </a>
 
                 {% endif %}
@@ -38,11 +38,11 @@
                 {% if user.is_superuser %}
 
                     <a class="ui item" href="{% url 'root_list' %}">
-                        <i class="download  icon"></i>輸入資料
+                        <i class="download  icon"></i>Import Data
                     </a>
 
                     <a class="ui item" href="{% url 'site_admin' %}">
-                        <i class="dashboard icon"></i>網站管理員
+                        <i class="dashboard icon"></i>Site Admin
                     </a>
 
                 {% endif %}
@@ -83,7 +83,7 @@
 
 
             <a class="{% activate "logout" active %} item" href="{% url 'logout' %}">
-                <i class="sign out icon"></i><span class="widescreen">登出</span>
+                <i class="sign out icon"></i><span class="widescreen">Logout</span>
             </a>
             <a class="{% activate "bin" active %} item" href="{% url 'recycle_bin' %}">
                 <i class="trash icon"></i>
@@ -92,7 +92,7 @@
         {% else %}
 
             <a class="{% activate "login" active %} item" href="{% url 'login' %}">
-                <i class="sign in icon"></i>登入
+                <i class="sign in icon"></i>Login
             </a>
 
         {% endif %}

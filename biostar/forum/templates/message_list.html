@@ -50,7 +50,7 @@
     <div class="ui large wrap-text" id="sidebar">
 
     {% cache 500 "messages" request.user.pk %}
-        {% custom_feed ftype='messages' objs=all_messages title='訊息傳送者' %}
+        {% custom_feed ftype='messages' objs=all_messages title='Messages by' %}
     {% endcache %}
     </div>
 

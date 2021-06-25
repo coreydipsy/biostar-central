@@ -4,11 +4,11 @@
 {% load cache %}
 
 {% block title %}
-    Crew
+    Bioinformatics Answers
 {% endblock %}
 
 {% block headtitle %}
-    Crew
+    Bioinformatics Answers
 {% endblock %}
 
 {% block body %}
@@ -34,7 +34,7 @@
                 {% post_details post=post user=request.user avatar=avatar %}
             {% empty %}
                 <div class="ui warn message">
-                    找不到貼文
+                    No posts found.
                 </div>
             {% endfor %}
         </div>

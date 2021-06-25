@@ -4,37 +4,37 @@
 <div class="ui borderless menu" id="topicbar">
 
     <a class="item {% activate tab "latest" %} " href="{% url 'post_list' %}">
-        <i class="list icon"></i> 最新
+        <i class="list icon"></i> Latest
     </a>
     <a class="item {% activate tab "open" %} " href="{% url 'post_topic' 'open' %}">
-        <i class="envelope open icon"></i> 未答
+        <i class="envelope open icon"></i> Open
     </a>
 
-     <a class="item {% activate tab "news" %} " href="{% url 'post_topic' 'news' %}">
-        <i class="newspaper icon"></i> 新聞
-    </a>
+    <!-- <a class="item {% activate tab "news" %} " href="{% url 'post_topic' 'news' %}">
+        <i class="newspaper icon"></i> News
+    </a> -->
     <a class="item {% activate tab "jobs" %} " href="{% url 'post_topic' 'jobs' %}">
-        <i class="briefcase icon"></i> 尋找夥伴
+        <i class="briefcase icon"></i> Jobs
     </a>
     <a class="item {% activate tab "tutorials" %} " href="{% url 'post_topic' 'tutorials' %}">
-        <i class="help circle icon"></i> 教學
+        <i class="help circle icon"></i> Tutorials
     </a>
-
+    <!--
     <a class="item {% activate tab "forum" %} " href="{% url 'post_topic' 'forum' %}">
-        <i class="file icon"></i> 討論
+        <i class="file icon"></i> Forum
     </a>
-
+    -->
 
     <a class="item {% activate tab "tags" %} " href="{% url 'tags_list' %}">
-        <i class="tag icon"></i> 標籤
+        <i class="tag icon"></i> Tags
     </a>
 
     <a class="item  {% activate tab "about" %}" href="{% url 'pages' 'about' %}">
-        <i class="info circle icon"></i>關於我們
+        <i class="info circle icon"></i>About
     </a>
 
         <a class="item  {% activate tab "faq" %}" href="/info/faq/">
-        <i class="info recycle icon"></i>聯絡我們
+        <i class="info recycle icon"></i>FAQ
     </a>
 
 </div>
@@ -49,25 +49,25 @@
     {% endblock %}
 
     <a class="item {% activate tab "community" %}" href="{% url 'community_list' %}">
-        <i class="world icon"></i> 社群
+        <i class="world icon"></i> Community
     </a>
 
     <a class="item {% activate tab "planet" %} " href="{% url 'blog_list' %}">
-        <i class="rss icon"></i> 個人部落格  {% count_badge counts.planet_count %}
+        <i class="rss icon"></i> Planet  {% count_badge counts.planet_count %}
     </a>
 
     {% if request.user.profile.is_moderator %}
         <a class="item {% activate tab 'spam' %} " href="{% url 'post_topic' 'spam' %}">
-            <i class="bug icon"></i> 違規貼文{% count_badge counts.spam_count %}
+            <i class="bug icon"></i> Spam  {% count_badge counts.spam_count %}
         </a>
         <a class="item {% activate tab 'activity' %} " href="{% url 'view_logs' %}">
-            <i class="chess queen icon"></i> 變動 {% count_badge counts.mod_count %}
+            <i class="chess queen icon"></i> Mods {% count_badge counts.mod_count %}
         </a>
     {% endif %}
 
 
     <a class="item {% activate tab "new" %}" href="{% url 'post_create' %}">
-        <i class="edit icon"></i> 新文章
+        <i class="edit icon"></i> New Post
     </a>
 
     <div class="right menu">
@@ -79,11 +79,11 @@
             </a>
 
             <a class="item  {% activate tab "logout" %}" href="{% url 'logout' %}" id="new-post">
-                <i class="sign-out icon"></i> 登出
+                <i class="sign-out icon"></i> Log Out
             </a>
         {% else %}
             <a class="item  {% activate tab "login" %}" href="{% url 'login' %}" id="new-post">
-                <i class="sign-in icon"></i> 登入
+                <i class="sign-in icon"></i> Log In
             </a>
 
         {% endif %}

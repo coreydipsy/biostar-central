@@ -67,7 +67,7 @@ def count_badge(count):
 @register.simple_tag(takes_context=True)
 def activate(context, state, target):
     targets = target.split(',')
-    label = "活躍" if state in targets else ""
+    label = "active" if state in targets else ""
 
     return label
 
@@ -190,7 +190,7 @@ def post_user_box(context, target_user, post):
 
 
 @register.inclusion_tag('widgets/post_actions.html', takes_context=True)
-def post_actions(context, post, label="留言", author=None, lastedit_user=None, avatar=False):
+def post_actions(context, post, label="ADD COMMENT", author=None, lastedit_user=None, avatar=False):
     request = context["request"]
 
     return dict(post=post, user=request.user, author=author, lastedit_user=lastedit_user,
@@ -269,8 +269,8 @@ def follow_label(context, post):
     not_following = "not following"
 
     label_map = {
-        Subscription.LOCAL_MESSAGE: "由訊息追蹤",
-        Subscription.EMAIL_MESSAGE: "由email追蹤",
+        Subscription.LOCAL_MESSAGE: "following with messages",
+        Subscription.EMAIL_MESSAGE: "following via email",
         Subscription.NO_MESSAGES: not_following,
     }
 
@@ -344,6 +344,27 @@ def file_tags_options(selected):
         opts = []
 
     return opts
+
+
+@register.inclusion_tag('forms/field_tags.html', takes_context=True)
+def tags_field(context, form_field, initial=''):
+    """Render multi-select dropdown options for tags. """
+
+    # Read from tags file
+    tags_file = getattr(settings, "TAGS_OPTIONS_FILE", None)
+    # Get currently selected tags from the post or request
+    selected = initial.split(",") if initial else []
+    selected = {(val, True) for val in selected}
+    if tags_file:
+        opts = file_tags_options(selected)
+    else:
+        opts = {}
+
+    options = itertools.chain(selected, opts)
+
+    context = dict(initial=initial, form_field=form_field, dropdown_options=options)
+
+    return context
 
 
 @register.inclusion_tag('forms/form_errors.html')
