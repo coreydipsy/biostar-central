@@ -1,8 +1,21 @@
 {% load forum_tags %}
 {% load static %}
 
+
+<link href="{% static 'pagedown.css' %}" type="text/css" media="all" rel="stylesheet">
+<link href="{% static 'pagedown/demo/browser/demo.css' %}" type="text/css" media="all" rel="stylesheet">
+
+<script type="text/javascript" src="{% static 'pagedown/Markdown.Converter.js' %}"></script>
+<script type="text/javascript" src="{% static 'pagedown-extra/pagedown/Markdown.Converter.js' %}"></script>
+<script type="text/javascript" src="{% static 'pagedown/Markdown.Sanitizer.js' %}"></script>
+<script type="text/javascript" src="{% static 'pagedown/Markdown.Editor.js' %}"></script>
+<script type="text/javascript" src="{% static 'pagedown-extra/Markdown.Extra.js' %}"></script>
 <script type="text/javascript" src="{% static 'inplace_pagedown.js' %}{% randparam %}"></script>
 
+
+<script src="{% static 'markdown-it.js' %}"></script>
+<script src="{% static 'effects.js' %}{% randparam %}"></script>
+<script src="{% static 'inplace.js' %}{% randparam %}"></script>
 
 <div class="ui basic form-wrap segment fit" id="inplace">
 
@@ -31,7 +44,9 @@
                 {% if post.is_toplevel %}
                     {% include 'widgets/post_message.html' %}
                 {% endif %}
+
                 {% include 'widgets/textarea.html' %}
+
             </div>
             {# Edit the tags #}
             {% if post.is_toplevel %}
@@ -44,7 +59,7 @@
         {% endif %}
 
 
-        <p class="muted">Tips: CTRL+ENTER to submit the form. ESC to cancel. Markdown accepted.</p>
+        <p class="muted">小訣竅: 按CTRL+ENTER來傳送，按ESC取消。接受Markdown</p>
 
         {# Preview segment #}
         <div class="ui preview segment">{{ html |safe }}</div>
@@ -83,7 +98,7 @@
         });
         // initialize autocomplete
         autocomplete_users();
-
+        
         $(this).on('click', '#inplace .cancel', function () {
             cancel_inplace()
         });
@@ -104,17 +119,6 @@
                 save.click();
             }
         });
-
-        $(this).on('keyup keypress', '#inplace #tag_val', function () {
-
-            // Submit form when pressing enter on tags field.
-            if (event.keyCode === 13 || event.keyCode === 10) {
-                event.preventDefault();
-                var save = $('#inplace').find('.save, .create');
-                save.click();
-            }
-        });
-
         $("body").on("click", '.pagedown-image-upload.show .submit-input', function () {
 
             var form = $(this).closest('form');

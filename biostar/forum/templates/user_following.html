@@ -4,6 +4,6 @@
 
 {% block sidebar %}
     {% cache 500 "follow" request.user.pk %}
-        {% custom_feed ftype="follow" objs=posts title='People you are following' %}
+        {% custom_feed ftype="follow" objs=posts title='你追蹤的人' %}
     {% endcache %}
 {% endblock %}

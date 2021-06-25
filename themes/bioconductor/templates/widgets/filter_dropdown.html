@@ -11,32 +11,32 @@
                     <div class="menu">
 
                         <a class="item" href="{% relative_url 'all' 'limit' params %}">
-                            <i class="{% activate_check_mark limit 'all' %}"></i>all time
+                            <i class="{% activate_check_mark limit 'all' %}"></i>全部
                         </a>
                         <a class="item" href="{% relative_url 'today' 'limit' params %}">
-                            <i class="{% activate_check_mark limit 'today' %}"></i>today
+                            <i class="{% activate_check_mark limit 'today' %}"></i>本日
                         </a>
                         <a class="item" href="{% relative_url 'week' 'limit' params %}">
-                            <i class="{% activate_check_mark limit 'week' %}"></i>this week
+                            <i class="{% activate_check_mark limit 'week' %}"></i>本週
                         </a>
                         <a class="item" href="{% relative_url 'month' 'limit' params %}">
-                            <i class="{% activate_check_mark limit 'month' %}"></i>this month
+                            <i class="{% activate_check_mark limit 'month' %}"></i>本月
                         </a>
                         <a class="item" href="{% relative_url 'year' 'limit' params %}">
-                            <i class="{% activate_check_mark limit 'year' %}"></i>this year
+                            <i class="{% activate_check_mark limit 'year' %}"></i>今年
                         </a>
                         <div class="ui divider"></div>
                         <a class="item" href="{% url 'post_topic' 'open' %}">
-                            <i class="{% activate_check_mark type 'open' %}"></i>Unanswered
+                            <i class="{% activate_check_mark type 'open' %}"></i>尚未回答
                         </a>
 
                         <a class="item" href="{% url 'post_list' %}">
-                            <i class="{% activate_check_mark type 'latest' %}"></i>All posts
+                            <i class="{% activate_check_mark type 'latest' %}"></i>全部貼文
                         </a>
                         {%  if  request.user.profile.is_moderator %}
 
                          <a class="item" href="{% url 'post_topic' 'spam' %}">
-                            <i class="{% activate_check_mark type 'spam' %}"></i>Spam posts
+                            <i class="{% activate_check_mark type 'spam' %}"></i>違規文章
                         </a>
                         {% endif %}
 
@@ -55,29 +55,29 @@
                     <div class="menu">
 
                         <a class="item" href="{% relative_url 'update' 'order' params %}">
-                            <i class="{% activate_check_mark order 'update' %}"></i>Update
+                            <i class="{% activate_check_mark order 'update' %}"></i>更新
                         </a>
                         <a class="item" href="{% relative_url 'answers' 'order' params %}">
-                            <i class="{% activate_check_mark order 'answers' %}"></i>Answers
+                            <i class="{% activate_check_mark order 'answers' %}"></i>答案
                         </a>
                          <a class="item" href="{% relative_url 'bookmarks' 'order' params %}">
-                            <i class="{% activate_check_mark order 'bookmarks' %}"></i>Bookmarks
+                            <i class="{% activate_check_mark order 'bookmarks' %}"></i>書籤
                         </a>
                           <a class="item" href="{% relative_url 'creation' 'order' params %}">
-                            <i class="{% activate_check_mark order 'creation' %}"></i>Creation
+                            <i class="{% activate_check_mark order 'creation' %}"></i>創作
                         </a>
                         <a class="item" href="{% relative_url 'replies' 'order' params %}">
-                            <i class="{% activate_check_mark order 'replies' %}"></i>Replies
+                            <i class="{% activate_check_mark order 'replies' %}"></i>回覆
                         </a>
                         <a class="item" href="{% relative_url 'rank' 'order' params %}">
-                            <i class="{% activate_check_mark order 'rank' %}"></i>Rank
+                            <i class="{% activate_check_mark order 'rank' %}"></i>排序
                         </a>
                         <a class="item" href="{% relative_url 'views' 'order' params %}">
-                            <i class="{% activate_check_mark order 'views' %}"></i>Views
+                            <i class="{% activate_check_mark order 'views' %}"></i>觀看
                         </a>
 
                         <a class="item" href="{% relative_url 'votes' 'order' params %}">
-                            <i class="{% activate_check_mark order 'votes' %}"></i>Votes
+                            <i class="{% activate_check_mark order 'votes' %}"></i>投票
                         </a>
 
                     </div>

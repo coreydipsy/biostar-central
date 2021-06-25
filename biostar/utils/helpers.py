@@ -65,7 +65,6 @@ def htmltomarkdown(text):
         content = html2markdown.convert(text)
     except Exception as exc:
         logger.warning(f"error={exc};text={text[:100]}")
-        # Return escaped text
         content = html.escape(text)
 
     return content

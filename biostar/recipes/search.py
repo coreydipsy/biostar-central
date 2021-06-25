@@ -45,7 +45,7 @@ class SearchForm(forms.Form):
         self.search_fields = search_fields
         super(SearchForm, self).__init__(*args, **kwargs)
 
-    q = forms.CharField(label='Search', required=False)
+    q = forms.CharField(label='搜尋', required=False)
 
     def clean_q(self):
         query = self.cleaned_data['q'].strip()
