@@ -1,5 +1,5 @@
 import logging
-from biostar.forum.settings import *
+#from biostar.forum.settings import *
 #from biostar.recipes.settings import *
 
 logger = logging.getLogger("biostar")
@@ -19,7 +19,7 @@ ADMINS = [
 DEFAULT_ADMIN_PASSWORD = SECRET_KEY
 
 # Set the site domain.
-SITE_DOMAIN = "foo.com"
+SITE_DOMAIN = "188.166.240.106"
 
 SITE_ID = 1
 HTTP_PORT = ''

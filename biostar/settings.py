@@ -167,7 +167,7 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ['www.lvh.me', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['www.lvh.me', 'localhost', '127.0.0.1','thecrew.com.tw']
 
 # The URL configuration.
 ROOT_URLCONF = 'biostar.urls'

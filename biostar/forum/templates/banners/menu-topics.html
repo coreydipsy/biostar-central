@@ -5,35 +5,35 @@
     <div class="ui small attached six item menu" id="menu-topics">
 
         <a class="item {% activate tab "myposts" %}" href="{% url 'myposts' %}">
-            <i class="comments icon"></i> My Posts
+            <i class="comments icon"></i> 我的貼文
         </a>
 
          <a class="item {% activate tab "bookmarks" %}" href="{% url 'bookmarks' %}">
-            <i class="bookmark icon"></i> Bookmarks
+            <i class="bookmark icon"></i> 書籤
         </a>
 
         <a class="item {% activate tab "messages" %}" href="{% url 'inbox' %}">
             {% if counts.message_count %}
                 <div class="ui green button"> <i class="envelope icon"></i>Messages {{ counts.message_count }}</div>
             {%  else %}
-                 <i class="envelope icon"></i>Messages
+                 <i class="envelope icon"></i>訊息
             {% endif %}
         </a>
         <a class="item {% activate tab "myvotes" %}" href="{% url 'myvotes' %}">
             {% if counts.vote_count %}
                 <div class="ui pink button"><i class="heart icon"></i> Votes {{ counts.vote_count }}</div>
             {%  else %}
-                <i class="heart icon"></i> Votes
+                <i class="heart icon"></i> 我的投票
             {% endif %}
 
         </a>
 
         <a class="item {% activate tab "mytags" %}" href="{% url 'mytags' %}">
-            <i class="tags icon"></i> My Tags
+            <i class="tags icon"></i> 我的標籤
         </a>
 
         <a class="item {% activate tab "following" %}" href="{% url 'following' %}">
-            <i class="eye icon"></i> Following
+            <i class="eye icon"></i> 追蹤中
         </a>
 
     </div>

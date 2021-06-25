@@ -7,7 +7,7 @@
 <head>
 
     <title>
-        {% block title %}Biostar{% endblock %}
+        {% block title %}Crew{% endblock %}
     </title>
 
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
 
     {# Set the favicon #}
     {% block favicon %}
-        <link rel="icon" href="{% static 'forum_favicon.ico' %}" type="image/x-icon"/>
+        <link rel="icon" href="{% static 'crewlogo.ico' %}" type="image/x-icon"/>
     {% endblock %}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -55,9 +55,7 @@
     {# Javascript compression. #}
     {% compress js %}
         <script src="{% static 'semantic.min.js' %}"></script>
-        <script src="{% static 'setup.js' %}{% randparam %}"></script>
         <script src="{% static 'forum.js' %}{% randparam %}"></script>
-        <script src="{% static 'inplace.js' %}{% randparam %}"></script>
         {% block jsfile %}
         {% endblock %}
 

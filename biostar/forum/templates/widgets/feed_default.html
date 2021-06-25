@@ -4,7 +4,7 @@
 
 <div class="event">
     <div class="ui container">
-        <div class="title"> Recent Votes</div>
+        <div class="title"> 近期的投票 </div>
         <div class="ui relaxed list">
             {% for vote in recent_votes %}
                 <div class="item spaced">
@@ -20,8 +20,8 @@
 
 <div class="event">
     <div class="ui container">
-        <div class="title">Recent Locations &bull;
-            <a href="{% url "community_list" %}"> All <i class="ui angle small double right icon"></i></a>
+        <div class="title">最近的用戶 &bull;
+            <a href="{% url "community_list" %}"> 全部<i class="ui angle small double right icon"></i></a>
         </div>
         <div class="ui relaxed list">
 
@@ -46,8 +46,8 @@
 
 <div class="event">
     <div class="ui container">
-        <div class="title">Recent Awards &bull;
-            <a href="{% url 'badge_list' %}">  All <i class="ui angle small double right icon"></i></a>
+        <div class="title">最近的獎項 &bull;
+            <a href="{% url 'badge_list' %}">  全部 <i class="ui angle small double right icon"></i></a>
         </div>
         <div class="ui relaxed list">
             {% for award in recent_awards %}
@@ -72,7 +72,7 @@
 
 <div class="event">
     <div class="ui container">
-        <div class="title">Recent Replies</div>
+        <div class="title">最近的回覆</div>
         <div class="ui relaxed list">
 
             {% for replies in recent_replies %}

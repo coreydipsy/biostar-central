@@ -67,7 +67,7 @@ def count_badge(count):
 @register.simple_tag(takes_context=True)
 def activate(context, state, target):
     targets = target.split(',')
-    label = "active" if state in targets else ""
+    label = "活躍" if state in targets else ""
 
     return label
 
@@ -122,11 +122,6 @@ def gravatar(user=None, user_uid=None, size=80):
         user = User.objects.filter(profile__uid=user_uid).first()
 
     return auth.gravatar(user=user, size=size)
-
-
-@register.filter
-def embed(text):
-    return markdown.parse(text, clean=True, escape=True)
 
 
 @register.inclusion_tag('widgets/filter_dropdown.html', takes_context=True)
@@ -195,7 +190,7 @@ def post_user_box(context, target_user, post):
 
 
 @register.inclusion_tag('widgets/post_actions.html', takes_context=True)
-def post_actions(context, post, label="ADD COMMENT", author=None, lastedit_user=None, avatar=False):
+def post_actions(context, post, label="留言", author=None, lastedit_user=None, avatar=False):
     request = context["request"]
 
     return dict(post=post, user=request.user, author=author, lastedit_user=lastedit_user,
@@ -274,8 +269,8 @@ def follow_label(context, post):
     not_following = "not following"
 
     label_map = {
-        Subscription.LOCAL_MESSAGE: "following with messages",
-        Subscription.EMAIL_MESSAGE: "following via email",
+        Subscription.LOCAL_MESSAGE: "由訊息追蹤",
+        Subscription.EMAIL_MESSAGE: "由email追蹤",
         Subscription.NO_MESSAGES: not_following,
     }
 
@@ -690,8 +685,6 @@ def post_boxclass(root_type, answer_count, root_has_accepted):
         style = "forum"
     elif root_type == Post.NEWS:
         style = "news"
-    elif root_type == Post.HERALD:
-        style = "herald"
     else:
         style = "question"
 
@@ -704,14 +697,6 @@ def post_boxclass(root_type, answer_count, root_has_accepted):
         modifier = "open"
 
     return f"{style} {modifier}"
-
-
-@register.inclusion_tag('herald/herald_item.html', takes_context=True)
-def herald_item(context, item):
-    request = context['request']
-    user = request.user
-    context = dict(story=item, request=request, user=user)
-    return context
 
 
 @register.simple_tag
