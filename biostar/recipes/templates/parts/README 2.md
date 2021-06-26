@@ -1,1 +1,0 @@
-Stores page fragments included into full pages.
