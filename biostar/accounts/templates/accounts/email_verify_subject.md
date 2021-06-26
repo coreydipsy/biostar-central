@@ -1,1 +1,1 @@
-請驗證你的email
+Please verify your email.

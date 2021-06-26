@@ -10,7 +10,7 @@ from django.conf import settings
 from snowpenguin.django.recaptcha2.fields import ReCaptchaField
 from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 from biostar.accounts.models import User
-from .models import Post
+from .models import Post, SharedLink
 from biostar.forum import models, auth
 
 from .const import *
@@ -70,13 +70,9 @@ def informative_choices(choices):
     Map choices for post types to a more informative description.
     """
     mapper = {
-        Post.QUESTION: "問問題", Post.TUTORIAL: "分享教學",
-         Post.FORUM: "討論",
-        Post.TOOL: "分享工具", Post.NEWS: "宣布新聞",
-        Post.BLOG: "部落格",
-        Post.JOB: "尋找夥伴",
-
-
+        Post.QUESTION: "Ask a question", Post.TUTORIAL: "Share a Tutorial",
+        Post.JOB: "Post a Job Opening", Post.FORUM: "Start a Discussion",
+        Post.TOOL: "Share a Tool", Post.NEWS: "Announce News"
     }
     new_choices = []
     for c in choices:
@@ -116,23 +112,23 @@ def required_tags(lst):
 
 
 class PostLongForm(forms.Form):
-    choices = [opt for opt in Post.TYPE_CHOICES if opt[0] in Post.TOP_LEVEL]
+    choices = [opt for opt in Post.TYPE_CHOICES if opt[0] in Post.TOP_LEVEL and opt[0] != Post.HERALD]
 
     if settings.ALLOWED_POST_TYPES:
         choices = [opt for opt in choices if opt[1] in settings.ALLOWED_POST_TYPES]
 
     choices = informative_choices(choices=choices)
 
-    post_type = forms.IntegerField(label="貼文種類",
+    post_type = forms.IntegerField(label="Post Type",
                                    widget=forms.Select(choices=choices, attrs={'class': "ui dropdown"}),
-                                   help_text="選擇貼文種類")
+                                   help_text="Select a post type.")
     title = forms.CharField(label="Post Title", max_length=200, min_length=2,
                             validators=[valid_title],
-                            help_text="明確的標題對回答者非常有幫助.")
+                            help_text="Enter a descriptive title to promote better answers.")
     tag_val = forms.CharField(label="Post Tags", max_length=MAX_TAG_LEN, required=True, validators=[valid_tag],
 
                               widget=forms.TextInput(attrs={'id': 'tag_val'}),
-                              help_text="""輸入跟這個文章相關的標籤""")
+                              help_text="""Create a new tag by typing a word then adding a comma.""")
 
     content = forms.CharField(widget=forms.Textarea,
                               validators=[valid_language],
@@ -210,3 +206,48 @@ class PostShortForm(forms.Form):
         if self.user.is_anonymous:
             raise forms.ValidationError("You need to be logged in.")
         return cleaned_data
+
+
+class MergeProfiles(forms.Form):
+
+    main = forms.CharField(label='Main user email', max_length=100, required=True)
+    alias = forms.CharField(label='Alias email to merge to main', max_length=100, required=True)
+
+    def __init__(self, user=None, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
+    def clean(self):
+        cleaned_data = super(MergeProfiles, self).clean()
+        alias = cleaned_data['alias']
+        main = cleaned_data['main']
+
+        to_delete = User.objects.filter(email=alias).first()
+        merge_to = User.objects.filter(email=main).first()
+
+        if self.user and not (self.user.is_staff or self.user.is_superuser):
+            raise forms.ValidationError(f'Only staff member can perform this action.')
+
+        if not to_delete:
+            raise forms.ValidationError(f'{alias} email does not exist.')
+
+        if not merge_to:
+            raise forms.ValidationError(f'{main} email does not exist.')
+
+        if main == alias:
+            raise forms.ValidationError('Main and alias profiles are the same.')
+
+        return cleaned_data
+
+    def save(self):
+
+        alias = self.cleaned_data['alias']
+        main = self.cleaned_data['main']
+
+        main = User.objects.filter(email=main).first()
+        alias = User.objects.filter(email=alias).first()
+
+        # Merge the two accounts.
+        auth.merge_profiles(main=main, alias=alias)
+
+        return main

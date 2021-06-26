@@ -15,13 +15,13 @@ from django.conf import settings
 
 from biostar.accounts.const import MESSAGE_COUNT
 from biostar.accounts.models import Message
-from biostar.planet.models import BlogPost
+from biostar.planet.models import BlogPost, Blog
 # Needed for historical reasons.
 from biostar.accounts.models import Profile
 from biostar.utils.helpers import get_ip
 from . import util, awards
 from .const import *
-from .models import Post, Vote, Subscription, Badge, delete_post_cache, Log
+from .models import Post, Vote, Subscription, Badge, delete_post_cache, Log, SharedLink
 
 User = get_user_model()
 
@@ -208,18 +208,48 @@ def create_post_from_json(**json_data):
     return
 
 
-def create_post(author, title, content, root=None, parent=None, ptype=Post.QUESTION, tag_val=""):
+def create_post(author, title, content, request, root=None, parent=None, ptype=Post.QUESTION, tag_val="", nodups=True):
     # Check if a post with this exact content already exists.
-    post = Post.objects.filter(content=content, author=author, is_toplevel=True).first()
-    if post:
-        logger.info("Post with this content already exists.")
-        return post
+    post = Post.objects.filter(content=content, author=author).order_by('-creation_date').first()
+
+    # How many seconds since the last post should we disallow duplicates.
+    time_frame = 60
+    if nodups and post:
+        # Check to see if this post was made within given timeframe
+        delta_secs = (util.now() - post.creation_date).seconds
+        if delta_secs < time_frame:
+            messages.warning(request, "Post with this content was created recently.")
+            return post
 
     post = Post.objects.create(title=title, content=content, root=root, parent=parent,
                                type=ptype, tag_val=tag_val, author=author)
 
     delete_cache(MYPOSTS, author)
     return post
+
+
+def merge_profiles(main, alias):
+    """
+    Merge alias profile into main
+    """
+
+    # Transfer posts
+    Post.objects.filter(author=alias).update(author=main)
+    Post.objects.filter(lastedit_user=alias).update(lastedit_user=main)
+
+    # Transfer messages
+    Message.objects.filter(sender=alias).update(sender=main)
+    Message.objects.filter(recipient=alias).update(recipient=main)
+
+    # Do not delete older accounts.
+    older = (alias.profile.date_joined < main.profile.date_joined)
+
+    if alias.profile.is_moderator or alias.profile.high_rep or older:
+        return
+
+    alias.delete()
+
+    return
 
 
 def create_subscription(post, user, sub_type=None, update=False):

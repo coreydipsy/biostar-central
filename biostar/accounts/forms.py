@@ -60,7 +60,7 @@ def valid_tag(text):
 
 class SignUpForm(forms.Form):
     password1 = forms.CharField(
-        label="密碼",
+        label="Password",
         strip=False,
         widget=forms.PasswordInput,
         max_length=254,
@@ -68,7 +68,7 @@ class SignUpForm(forms.Form):
     )
 
     password2 = forms.CharField(
-        label="確認密碼",
+        label="Password confirmation",
         widget=forms.PasswordInput,
         strip=False,
         help_text="Enter the same password as before, for verification.",
@@ -141,53 +141,53 @@ class EditProfile(forms.Form):
 
         super(EditProfile, self).__init__(*args, **kwargs)
 
-        self.fields['name'] = forms.CharField(label='名字', max_length=100, required=True,
+        self.fields['name'] = forms.CharField(label='Name', max_length=100, required=True,
                                               initial=self.user.profile.name)
         self.fields['email'] = forms.CharField(label='Email', max_length=100, required=True,
                                                initial=self.user.email)
-        self.fields['handle'] = forms.CharField(label="處理者", max_length=100, required=True,
+        self.fields['handle'] = forms.CharField(label="Handler", max_length=100, required=True,
                                                   initial=self.user.profile.handle)
-        self.fields['location'] = forms.CharField(label="位置", max_length=100, required=False,
+        self.fields['location'] = forms.CharField(label="Location", max_length=100, required=False,
                                                   initial=self.user.profile.location)
-        self.fields['website'] = forms.URLField(label="網站", max_length=225, required=False,
+        self.fields['website'] = forms.URLField(label="Website", max_length=225, required=False,
                                                 initial=self.user.profile.website)
-        self.fields['twitter'] = forms.CharField(label="Twitter", max_length=100, required=False,
+        self.fields['twitter'] = forms.CharField(label="Twitter Id", max_length=100, required=False,
                                                  initial=self.user.profile.twitter)
-        self.fields['scholar'] = forms.CharField(label="學術", max_length=100, required=False,
+        self.fields['scholar'] = forms.CharField(label="Scholar", max_length=100, required=False,
                                                  initial=self.user.profile.scholar)
 
-        self.fields['user_icon'] = forms.ChoiceField(required=False, label="標誌",
+        self.fields['user_icon'] = forms.ChoiceField(required=False, label="User icon",
                                                      choices=Profile.USER_ICON_CHOICES,
                                                      widget=forms.Select(attrs={'class': "ui dropdown"}),
                                                      initial=self.user.profile.user_icon,
-                                                     help_text="標誌類型")
+                                                     help_text="User icon type")
 
         self.fields['text'] = forms.CharField(widget=forms.Textarea(attrs={'rows': 20}),
                                               min_length=2, max_length=5000, required=False,
-                                              help_text="關於你的資訊 (markdown)",
+                                              help_text="Information about you (markdown)",
 
                                               initial=self.user.profile.text)
 
-        self.fields['message_prefs'] = forms.ChoiceField(required=True, label="通知",
+        self.fields['message_prefs'] = forms.ChoiceField(required=True, label="Notifications",
                                                          choices=Profile.MESSAGING_TYPE_CHOICES,
                                                          widget=forms.Select(attrs={'class': "ui dropdown"}),
                                                          initial=self.user.profile.message_prefs,
-                                                         help_text="通知會透過簡訊傳送")
+                                                         help_text="Default mode sends notifications using local messages.")
 
-        self.fields['digest_prefs'] = forms.ChoiceField(required=True, label="摘要",
+        self.fields['digest_prefs'] = forms.ChoiceField(required=True, label="Digest options",
                                                         choices=Profile.DIGEST_CHOICES,
                                                         widget=forms.Select(attrs={'class': "ui dropdown"}),
                                                         initial=self.user.profile.digest_prefs,
-                                                        help_text="摘要會透過email傳送")
+                                                        help_text="Digest are sent through the email provided.")
 
-        self.fields['my_tags'] = forms.CharField(label="我的標籤", max_length=500, required=False,
+        self.fields['my_tags'] = forms.CharField(label="My tags", max_length=500, required=False,
                                                  initial=self.user.profile.my_tags, validators=[valid_tag],
                                                  help_text="""
-                                   在字後面、按ENTER、按空白鍵以創建一個新的標籤
+                                  Add a tag by typing a word then adding a comma or press ENTER or SPACE.
                                   """)
         self.fields['watched_tags'] = forms.CharField(label="Watched tags", max_length=500, required=False,
                                                       help_text="""
-                                  在字後面、按ENTER、按空白鍵以創建一個新的標籤
+                                  Add a tag by typing a word then adding a comma or press ENTER or SPACE.
                                   """,initial=self.user.profile.watched_tags, validators=[valid_tag])
 
     def clean_handle(self):
@@ -197,7 +197,7 @@ class EditProfile(forms.Form):
         handle = Profile.objects.filter(handle=data).exclude(user=self.user)
 
         if handle.exists():
-            raise forms.ValidationError("這個名稱已經被使用了")
+            raise forms.ValidationError("This handle is already being used.")
 
         return data
 
@@ -206,7 +206,7 @@ class EditProfile(forms.Form):
         email = User.objects.filter(email=cleaned_data).exclude(pk=self.user.pk).first()
 
         if email:
-            raise forms.ValidationError("Email已經被使用了")
+            raise forms.ValidationError("Email already exists.")
 
         return cleaned_data
 
@@ -264,7 +264,7 @@ class EditProfile(forms.Form):
 
 class LoginForm(forms.Form):
     email = forms.CharField(label='Email', max_length=100)
-    password = forms.CharField(label='密碼', max_length=100,
+    password = forms.CharField(label='Password', max_length=100,
                                widget=forms.PasswordInput)
 
 
@@ -277,7 +277,7 @@ class UserModerate(forms.Form):
         (Profile.TRUSTED, "Reinstate as trusted user")
     ]
 
-    action = forms.IntegerField(widget=forms.RadioSelect(choices=CHOICES), required=False, label="選擇的行動")
+    action = forms.IntegerField(widget=forms.RadioSelect(choices=CHOICES), required=False, label="Select Action")
 
     def __init__(self, source, target, request, *args, **kwargs):
         self.source = source
@@ -291,16 +291,16 @@ class UserModerate(forms.Form):
         action = cleaned_data['action']
 
         if not self.source.profile.is_moderator:
-            raise forms.ValidationError("權限不足")
+            raise forms.ValidationError("You need to be a moderator to perform that action")
 
         if action == Profile.BANNED and not self.source.is_superuser:
-            raise forms.ValidationError("權限不足")
+            raise forms.ValidationError("You need to be an admin to ban users.")
 
         if self.target.profile.is_moderator and not self.source.is_superuser:
-            raise forms.ValidationError("權限不足")
+            raise forms.ValidationError("You need to be an admin to moderator other moderators.")
 
         if self.target == self.source:
-            raise forms.ValidationError("權限不足")
+            raise forms.ValidationError("You can not moderate yourself.")
 
 
 class ImageUploadForm(forms.Form):
@@ -328,7 +328,7 @@ class ImageUploadForm(forms.Form):
             return img
 
         if userimg.count() >= settings.MAX_IMAGES:
-            raise forms.ValidationError("超過最大照片上傳數量")
+            raise forms.ValidationError("Exceeded the maximum amount of images you can upload.")
 
         return img
 

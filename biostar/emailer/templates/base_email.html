@@ -9,11 +9,11 @@
 
 {% block html %}
     <p>
-        你好{{ target_email }},
+        Hello {{ target_email }},
     </p>
 
     <p>
-        這是個自動傳送的HTML email
+        This is an HTML email sent via the management command:
     </p>
 
     <p>
@@ -22,7 +22,7 @@
 
     {% if group %}
         <p>
-            你已經被加入 {{group}} 郵件名單
+            You are included in the {{group}} mailing list.
         </p>
     {% endif %}
 
@@ -35,14 +35,14 @@
 
 {% block text %}
 
-    你好 {{ target_email }},
+    Hello {{ target_email }},
 
-    這是個自動傳送的HTML email
+    This is a TEXT email sent via the management command:
 
     python manage.py send
 
     {% if group %}
-    你已經被加入 {{group}} 郵件名單
+    You are included in the {{group}} mailing list.
     {% endif %}
 
     {{ site.name }} Team

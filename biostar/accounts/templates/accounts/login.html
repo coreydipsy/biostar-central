@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-tw">
+<html lang="en">
 {% load socialaccount %}
 {% load accounts_tags %}
 <head>
     <meta charset="UTF-8">
-    <title>登入</title>
+    <title>Log in</title>
 </head>
 <body>
-<h2>請登入</h2>
+<h2>Please log in</h2>
 <p>
 
     {% if  social_login %}
@@ -22,7 +22,7 @@
 
 
             <p>
-                點擊下方來登入或註冊
+                Click the link below to log in or sign up automatically:
             </p>
 
                 <ul>
@@ -53,7 +53,7 @@
     </form>
 
     <p>
-    <a href="{% url 'password_reset' %}">忘記密碼</a>
+    <a href="{% url 'password_reset' %}">Forgot your password?</a>
     </p>
 
 </p>
