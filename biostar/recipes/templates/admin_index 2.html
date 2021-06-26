@@ -1,0 +1,81 @@
+{% extends "base_listing.html" %}
+{% load engine_tags %}
+
+{% block headtitle %}
+    Site Admin
+{% endblock %}
+
+{% block title %}
+    <i class="dashboard listing icon"></i> Site Admin
+{% endblock %}
+
+
+{% block content %}
+
+
+        <div class="ui vertical segment">
+
+            <div class="ui header">
+                <a href="{% url 'admin:index' %}">
+                    <i class="desktop icon"></i>Django Admin
+                </a>
+            </div>
+
+        </div>
+
+        <div class="ui vertical segment">
+            <div class="ui header">
+                All jobs
+            </div>
+            <div class="ui divided list">
+                <table class="ui celled selectable striped compact table">
+                    <thead>
+                    <tr>
+
+                        <th>Status</th>
+                        <th>Name</th>
+                        <th>Project</th>
+                        <th>User</th>
+                        <th>Start Date</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {% for job in jobs %}
+                        <tr >
+                            <td style="padding: 1px;text-align: center;">
+                                <div class="ui {% job_color job %} label">{{ job.get_state_display }}</div>
+                            </td>
+                            <td class="{% if job.deleted %}negative{% endif %}">
+                                <a href="{{ job.url }}">{{ job.get_name|truncatechars:40  }}</a>
+                            </td>
+
+                            <td>
+                                <a href="{{ job.project.url }}">{{ job.project.get_name|truncatechars:40 }}</a>
+                            </td>
+                           <td>
+                                <a href="{{ job.owner.profile.get_absolute_url }}">{{ job.owner.profile.name }}</a>
+                            </td>
+
+                            <td>
+                                {% if job.start_date %}{{ job.start_date }}{% else %} Not Started
+                                {% endif %}
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
+        </div>
+
+
+
+{% endblock %}
+
+

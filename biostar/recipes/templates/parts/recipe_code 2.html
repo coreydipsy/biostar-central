@@ -1,0 +1,32 @@
+{% load engine_tags %}
+
+<form method="post" class="ui form" action="#">
+
+    <div class="field" id="template_field">
+        <textarea class="code" rows="80" cols="55" name="template" id="code_editor">{% render_script tmpl=form.template.value recipe=recipe user=user %}</textarea>
+    </div>
+
+    {% if editable %}
+          <div class="item">
+            <button class="ui green {{ btn_state }} button ajax" type="submit">
+                <i class="save icon"></i> Save Code
+            </button>
+
+            <a class="ui gray button click" data-value="#info">
+                 <i class="redo icon"></i>Cancel
+            </a>
+        </div>
+
+    {% else %}
+       <div class="ui large muted center aligned vertical segment">
+            You need write access to the <a href="{{ recipe.root.url }}">original recipe</a> to edit.
+        </div>
+    {% endif %}
+
+</form>
+
+<script>
+$(document).ready(function () {
+    var code = init_codemirror($('#code_editor'), 600);
+});
+</script>

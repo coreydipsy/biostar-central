@@ -1,0 +1,52 @@
+{% load engine_tags %}
+
+<div class="ui basic large segment">
+    <div class="ui items" id="details">
+        {% recipe_details recipe include_copy %}
+    </div>
+    <div class="ui divider" style="margin-bottom: -20px;"></div>
+</div>
+
+<div class="ui items">
+    {{ recipe.html | safe }}
+</div>
+<div class="ui center aligned basic segment">
+
+    <a class="ui gray small button copy" data-value="#edit">
+        <i class="copy icon"></i> Copy recipe
+    </a>
+
+    {% if editable %}
+
+        <a class="ui gray small button click" href="#" data-value="#edit">
+            <i class="edit icon"></i> Edit description
+        </a>
+        <a class="ui small button " href="{% url 'recipe_delete' recipe.uid %}">
+            {% if recipe.deleted %}
+                <i class="undo icon"></i>Restore recipe
+            {% else %}
+                <i class="trash icon"></i>Delete recipe
+            {% endif %}
+        </a>
+
+    {% else %}
+        <div class="ui large muted center aligned vertical segment">
+            You need write access to the
+            {% if recipe.is_clone %}
+                <a href="{{ recipe.root.url }}">original recipe</a>
+            {% else %}
+                project
+            {% endif %}
+            to edit.
+        </div>
+
+    {% endif %}
+
+</div>
+<script>
+    $(document).ready(function () {
+        $('pre').addClass('language-bash');
+        $('code').addClass('language-bash').css('padding', '0');
+        Prism.highlightAll();
+    });
+</script>

@@ -1,0 +1,76 @@
+{% load forum_tags %}
+{% load cache %}
+
+
+{#  IS_MODERATOR set in context.py  #}
+{% cache 600 post context.IS_MODERATOR post.uid %}
+
+    <div class="post {{ post.css }} item" data-value="{{ post.uid }}">
+
+        <div class="stats">
+
+            <div class="ui mini stat left label">
+                <div>{{ post.get_votecount|bignum }}</div>
+                <div>vote{{ post.get_votecount|pluralize }}</div>
+            </div>
+
+            <div class="ui label stat mini {% boxclass post %} bookmark">
+                <div>{{ post.reply_count }}</div>
+                <div>repl{{ post.reply_count|pluralize:"y,ies" }}</div>
+            </div>
+
+            <div class="ui label basic transparent stat mini">
+                <div>{{ post.root.view_count|bignum }}</div>
+                <div>view{{ post.root.view_count|pluralize }}</div>
+            </div>
+            {% block counts %}
+                {% if post.subs_count > 4 %}
+                    {% subscription_label post.subs_count %}
+                {% endif %}
+            {% endblock %}
+
+        </div>
+
+        <div class="content">
+
+            <div class="title mini header">
+                {{ post.title_prefix }}&nbsp;
+                <a href="{% url 'post_view' post.uid %}">
+                    {{ post.title|truncatechars:150 }}
+                </a>
+            </div>
+
+            <div class="extra right floated">
+
+                <div class="left floated">
+                    {% if post.is_toplevel %}
+                        {% post_tags post spaced=False %}
+                    {% endif %}
+                </div>
+
+                {%  comment %}
+                {% if post.high_spam_score and user.profile.is_moderator %}
+
+                    <a href="{% url 'mark_spam' post.uid %}">
+
+                        {% if post.is_spam %}
+                            <i class="bug green icon"></i>
+                        {% else %}
+                            <i class="bug orange icon"></i>
+                        {% endif %}
+
+                    </a>
+
+                {% endif %}
+                {%  endcomment %}
+
+                <div class="right floated muted">
+                    {% post_user_line post avatar=avatar %}
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endcache %}

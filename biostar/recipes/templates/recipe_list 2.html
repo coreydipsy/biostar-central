@@ -1,0 +1,24 @@
+{% extends "base_content.html" %}
+{% load engine_tags %}
+{% block headtitle %}
+    Recipes
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="ui divided link recipes items">
+        {% for recipe in recipe_list %}
+            {% recipe_details recipe %}
+        {% empty %}
+            <div class="item">
+                <div class="ui warning message"><i class="ui info circle icon"></i>This project does not yet
+                    contain
+                    recipes.
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% pages objs=recipe_list %}
+
+{% endblock %}

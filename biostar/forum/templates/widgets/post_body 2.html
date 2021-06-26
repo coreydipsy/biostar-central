@@ -1,0 +1,95 @@
+{% load forum_tags %}
+
+
+{#  Post anchor. #}
+<a name="{{ post.uid }}"></a>
+
+<div class="post view {{ post.css }}" data-value="{{ post.uid }}">
+
+    {#  Post title. #}
+    {% if post.is_toplevel %}
+        {# Show author message about their quarantied post. #}
+        <div class="title" itemprop="name">{{ post.title_prefix }}{{ post.title }}</div>
+        <span itemprop="answerCount" style="display: none">{{ post.answer_count }}</span>
+    {% endif %}
+
+    {#  Post body #}
+    <div class="body"
+            {% if post.accept_count and post.is_answer %}
+                itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"
+            {% elif post.is_answer %}
+                itemprop="suggestedAnswer" itemscope itemtype="https://schema.org/Answer"
+            {% endif %}>
+
+        {#  Voting buttons #}
+        <div class="voting">
+            <button class="ui icon button" data-value="upvote"
+                    data-state="{{ post.has_upvote }}"><i class="thumbs up icon"></i>
+            </button>
+
+            <div class="score" itemprop="upvoteCount">{{ post.vote_count }}</div>
+
+            <button class="ui icon button" data-value="bookmark"
+                    data-state="{{ post.has_bookmark }}"><i class="bookmark icon"></i>
+            </button>
+
+            {% if post.can_accept %}
+                <button class="ui icon button" data-value="accept"
+                        data-state="{{ post.accept_count }}"><i class="check circle icon"></i>
+                </button>
+            {% elif post.accept_count and post.is_answer %}
+                <div class="ui icon"><i class="check green circle icon"></i></div>
+            {% endif %}
+        </div>
+
+
+        {# Render the content#}
+        <div class="content">
+            <div class="droppable inplace">
+                <div class="ui inverted dimmer">
+                    <div class="ui text loader">
+                        <div class="muted">Entering edit mode</div>
+                    </div>
+                </div>
+
+                <div class="wrap magnify">
+
+                    {# Display post author. #}
+                        {% post_user_box target_user=post.author post=post %}
+
+                    {# Display post content. #}
+                <span  itemprop="text">
+                    {% if post.is_editable %}
+                        <div class="editable">{{ post.html|safe }}</div>
+                    {% else %}
+                        {{ post.html|safe }}
+                    {% endif %}
+                </span>
+                </div>
+
+                {# Show tags #}
+                {% if post.is_toplevel %}
+                    {# Wrap tags to enable inplace editting #}
+                    <span class="inplace-tags">{% post_tags post=post show_views=True %}</span>
+                {% endif %}
+
+                <time itemprop="dateCreated" datetime="{{ post.creation_date|date:"Y-m-d" }}"></time>
+
+                {# Show the post actions #}
+
+                {% post_actions post=post %}
+
+
+            </div>
+
+            {# Render all comments #}
+            {% render_comments tree=tree post=post %}
+        </div>
+
+    </div>
+
+</div>
+
+
+
+

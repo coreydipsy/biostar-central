@@ -1,0 +1,167 @@
+{% load engine_tags %}
+
+{# The preview panel #}
+
+<div class="ui basic segment">
+    <div class="ui center aligned header">Recipe Interface Builder</div>
+
+    <div class="ui center aligned muted container">Click the buttons on the right to create new fields.</div>
+</div>
+
+<div class="ui grid">
+
+    <div class="eleven wide column">
+        <div class="ui" id="preview"></div>
+    </div>
+
+    <div class="four wide column">
+        <div class="ui labels">
+            <a class="ui left pointing label" data-value="
+                    [sra]
+                    label = 'Run Number'
+                    display = 'TEXTBOX'
+                    value = 'SRR519926'
+                    regex = 'SRR\d+'
+                    help = 'Please provide SRR Run number'
+                    ">
+                <i class="plus square outline icon"></i> Add text field
+            </a>
+            <a class="ui left pointing label" data-value="
+                        [cutoff]
+                        label = 'P_Value Cutoff'
+                        display = 'FLOAT'
+                        value = 0.05
+                        range = [0, 1]
+                        help = 'Selects the cutoff.'
+                        ">
+                <i class="plus square outline icon"></i> Add float field
+            </a>
+            <a class="ui left pointing label" data-value="
+                    [data]
+                    label = 'Pick data'
+                    source = 'PROJECT'
+                    help = 'Pick data from this project.'
+                    choices = [ ['A','Default'] ]
+                    ">
+                <i class="plus square outline icon"></i> Add data field
+            </a>
+            <a class="ui left pointing label" data-value="
+                    [validate]
+                    label = 'Cross Validate'
+                    display = 'CHECKBOX'
+                    value = true
+                    help = 'Apply cross validation on the results.'
+                    ">
+                <i class="plus square outline icon"></i> Add checkbox
+            </a>
+
+            <a class="ui left pointing label" data-value="
+                    [color]
+                    label = 'Select color'
+                    display = 'DROPDOWN'
+                    choices = [ ['R','Red'], ['B','Blue'] ]
+                    value = 'R'
+                    help = 'Select a color of your choice.'
+                    ">
+                <i class="plus square outline icon"></i> Add dropdown
+            </a>
+            <a class="ui left pointing label" data-value="
+                    [file]
+                    label = 'Upload a file'
+                    display = 'UPLOAD'
+                    help = 'Upload a file to analyze'
+                    ">
+                <i class="plus square outline icon"></i> Add upload field
+            </a>
+
+            <a class="ui left pointing label" data-value="
+                        [size]
+                        label = 'Window size'
+                        display = 'INTEGER'
+                        value = 100
+                        range = [1, 100]
+                        help = 'Selects the smoothing window.'
+                        ">
+                <i class="plus square outline icon"></i> Add integer field
+            </a>
+            <a class="ui left pointing label" data-value="
+                    [species]
+                    label = 'Select species'
+                    display = 'RADIO'
+                    choices = [ ['c','Cat'], ['d','Dog'] ]
+                    value = 'c'
+                    help = 'Select the species.'
+                    ">
+                <i class="plus square outline icon"></i> Add radio button
+            </a>
+        </div>
+    </div>
+</div>
+
+<form method="post" class="ui form" action="#">
+
+    <div class="ui basic segment">
+        <div class="ui center aligned header">Interface Editor</div>
+
+        <div class="ui center aligned muted container">Edit the content of each interface element.</div>
+
+    </div>
+
+    <div class="field" id="json_field">
+                        <textarea class="code" rows="40" cols="55"
+                                  name="json_text" id="interface_editor">{{ form.json_text.value }}</textarea>
+    </div>
+
+    {% if editable %}
+
+        <div class="item">
+            <button class="ui green  {{ btn_state }} button ajax" type="submit">
+                <i class="save icon"></i> Save Interface
+            </button>
+
+
+            <a class="ui gray button click" data-value="#info">
+                <i class="redo icon"></i>Cancel
+            </a>
+        </div>
+
+    {% else %}
+        <div class="ui large muted center aligned vertical segment">
+            You need write access to the <a href="{{ recipe.root.url }}">original recipe</a> to edit.
+        </div>
+
+    {% endif %}
+
+</form>
+
+<script>
+    $(document).ready(function () {
+        var textarea = $('#interface_editor');
+        var editor = init_codemirror(textarea, 400);
+
+        update_preview();
+
+        $(this).on('click', '.labels .label', function () {
+            //var curr = $(this).closest(".card");
+            var toml = $(this).data("value");
+
+            // Remove beginning space in first line, replace newline + spaces with newline.
+            toml = toml.replace(/^\s+/g, '\n');
+            toml = toml.replace(/\n[\s]+/g, '\n');
+
+            // Get the first line, take out the brackets.
+            toml = validate_toml(toml, textarea.val());
+
+            // Add clicked field to textarea and set values.
+            //var new_toml = textarea.val() + toml;
+            //editor.setValue(new_toml);
+            //var callback = function (){
+            var new_toml = textarea.val() + toml;
+            editor.setValue(new_toml);
+            //};
+
+            update_preview();
+            //popup_message($(this), 'Inserted into interface.', "success");
+        });
+    });
+</script>

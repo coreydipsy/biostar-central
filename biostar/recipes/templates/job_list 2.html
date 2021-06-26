@@ -1,0 +1,32 @@
+{% extends "base_content.html" %}
+{% load engine_tags %}
+{% load humanize %}
+
+{% block headtitle %}
+    Result List
+{% endblock %}
+
+{% block content %}
+
+
+    {% if recipe_filter %}
+        <div class="ui center aligned large vertical segment ">
+            <div class="ui success message">
+
+                Showing results from recipe: <a href="{% url 'recipe_view' recipe_filter.uid %}"><i
+                    class="settings icon"></i> {{ recipe_filter.name }}</a> &bull;
+                <a href="#" onclick="window.history.back()">
+                    <i class="angle double left icon icon"></i> <span class="fitme">Go Back</span>
+                </a>
+                &bull; <a href="{% url 'job_list' project.uid %}"><i class="undo icon"></i>Show all results</a>
+            </div>
+        </div>
+    {% endif %}
+
+        {# Set the column width in the grid. #}
+        {% with colwidth='fourteen' %}
+           {% include 'parts/recipe_results.html' %}
+        {% endwith %}
+
+{% pages objs=job_list %}
+{% endblock %}

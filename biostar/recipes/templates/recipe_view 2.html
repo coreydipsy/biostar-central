@@ -1,0 +1,128 @@
+{% extends "base_content.html" %}
+{% load static %}
+{% load engine_tags %}
+
+{% block title %}
+    <img class="ui avatar image" src="{% img recipe %}"/>{{ recipe.get_name }}
+{% endblock %}
+
+{% block js %}
+
+    <link rel="stylesheet" href="{% static 'codemirror/lib/codemirror.css' %}{% randparam %}">
+    <link rel="stylesheet" href="{% static 'codemirror/theme/idea.css' %}{% randparam %}">
+    <link rel="stylesheet" href="{% static 'pagedown.css' %}{% randparam %}">
+    <link rel="stylesheet" href="{% static 'pagedown/demo/browser/demo.css' %}{% randparam %}">
+
+    <script src="{% static 'codemirror/lib/codemirror.js' %}"></script>
+    <script src="{% static 'codemirror/addon/display/autorefresh.js' %}"></script>
+    <script src="{% static 'codemirror/mode/simple.js' %}"></script>
+    <script src="{% static 'codemirror/mode/engine.js' %}"></script>
+    <script src="{% static 'codemirror/mode/shell.js' %}"></script>
+
+    <script src="{% static 'pagedown/Markdown.Converter.js' %}"></script>
+    <script src="{% static 'pagedown-extra/pagedown/Markdown.Converter.js' %}"></script>
+    <script src="{% static 'pagedown/Markdown.Sanitizer.js' %}"></script>
+    <script src="{% static 'pagedown/Markdown.Editor.js' %}"></script>
+    <script src="{% static 'pagedown-extra/Markdown.Extra.js' %}"></script>
+
+    <script src="{% static 'pagedown_init.js' %}"></script>
+
+    {#  Javascript code that handles the recipe interfaces. #}
+    <script src="{% static 'recipes.js' %}{% randparam %}"></script>
+
+{% endblock %}
+
+{% block headtitle %}
+    Recipe View
+{% endblock %}
+
+{% block segment %}
+
+    <input type="hidden" id="recipe_id" value="{{ recipe.id }}">
+
+    <div class="ui recipes grid">
+
+        {# Side bar #}
+        <div class="three wide column">
+
+            <div class="ui vertical large text menu">
+                <a class="item click" href="#" data-value="#run">
+                    <i class="play olive icon"></i> Run
+                </a>
+                <div class="ui divider"></div>
+                <a class="item click" href="#" data-value="#info">
+                    <i class="info blue circle icon"></i> Information
+                </a>
+
+                <div class="ui divider"></div>
+
+                <a class="item click" href="#" data-value="#results">
+                    <i class="settings orange icon"></i> Results ({{ recipe.job_count }})
+                </a>
+
+                <div class="ui divider"></div>
+                <a class="item click" href="#" data-value="#code">
+                    <i class="code pink icon"></i> Code
+                </a>
+
+                <div class="ui divider"></div>
+
+                <a class="item click" href="#" data-value="#interface">
+                    <i class="tv brown icon"></i> Interface
+                </a>
+
+                <div class="ui divider"></div>
+
+                <a class="item" href="{{ recipe.download_url }}">
+                    <i class="download violet icon"></i> Download
+                </a>
+
+
+            </div>
+
+        </div>
+
+        <div class="thirteen wide column">
+
+            {# Info panel. Loads dynamically. #}
+            <div class="ui basic large segment collapse" id="info">
+                {% include "parts/recipe_info.html" %}
+            </div>
+
+            {# Code panel. #}
+            <div class="ui basic large segment collapse" id="code">
+                {% include "parts/recipe_code.html" %}
+            </div>
+
+            {# Interface panel. #}
+            <div class="ui basic segment collapse" id="interface">
+                {% include "parts/recipe_interface.html" %}
+            </div>
+
+            {# Edit panel. #}
+            <div class="ui basic large segment collapse formstyle" id="edit">
+                {% include "parts/recipe_edit.html" %}
+            </div>
+
+            {# Run panel. #}
+            <div class="ui basic large segment collapse recipe-form" id="run">
+                {#% include "parts/recipe_run.html" %#}
+            </div>
+
+
+            {# Results panel. #}
+            <div class="ui basic large segment collapse" id="results">
+                {#% include "parts/recipe_results.html" %#}
+            </div>
+
+
+            {# Preview anchor. #}
+            <div class="ui tiny inputcolor modal" id="preview">
+                <div></div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% load accounts_tags %}
+{% load engine_tags %}
+{% load humanize %}
+
+{{ prefix }} {{ date|time_ago }}
+
+{% if user %}
+    by <a href="{% url 'user_profile'  user.profile.uid %}" >
+        {{ user.profile.name }}
+    </a>
+
+{% endif %}
+
+
+

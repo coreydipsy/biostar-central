@@ -1,0 +1,25 @@
+{% extends "base_template.html" %}
+{% load engine_tags %}
+{% load static %}
+
+{% block headtitle %}
+    Base listing
+{% endblock %}
+
+
+{% block title %}
+    Listing
+{% endblock %}
+
+
+{% block body %}
+
+
+    <div class="ui basic large segment">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+
+{% endblock %}
