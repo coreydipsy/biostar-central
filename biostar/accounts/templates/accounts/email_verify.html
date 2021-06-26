@@ -16,27 +16,21 @@
             {{ protocol }}://{{ domain }}{{ port }}{% url 'email_verify_account' uidb64=userid token=token %}</a>
     </p>
     <p>
-        If clicking the link above doesn't work, please copy and paste the URL in a new browser window instead.
-    </p>
-    <p>
-        Sincerely,
-    </p>
-        <p>The Biostar Team
+        如果點擊後發生錯誤請複製此網址在新視窗中開啟
+
+        <p>Crew
         </p>
 
 
 {% endblock %}
 
 {% block text %}
-    To verify your account belonging to {{ user.email }}, click the link below:
+    要驗證你的帳號屬於 {{ user.email }}, 點擊下方連結:
 
     {{ protocol }}://{{ domain }}{{ port }}{% url 'email_verify_account' uidb64=userid token=token %}
+    如果點擊後發生錯誤請複製此網址在新視窗中開啟
 
-    If clicking the link above doesn't work, please copy and paste the URL in a new browser
-    window instead.
-
-    Sincerely,
-    The Biostar Team
+    Crew
 
 {% endblock %}
 
