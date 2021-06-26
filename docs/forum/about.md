@@ -1,49 +1,24 @@
-# About Biostar
+# 關於 crew
 
-This site's focus is **bioinformatics**, **computational genomics** and **biological data analysis**. We welcome posts that are:
+這個網站致力於提供一個中文的程式討論區，我們希望可以扮演中文的 **stack overflow**。 
+我們覺得，學新東西時使用自己的母語能夠更好地理解，而網路上大部分有關程式的資料都是以英文為主，
+就算有中文的介紹也是偏向單方面的教學而不是討論，然而程式並不像考試有正確答案，每個人的開發環境也有些許不同，
+我們認為以中文討論區的方式最能有效的解決新手遇到的問題。除此之外我們也觀察到有些剛接觸程式的學生可能滿懷著學程式的熱忱，
+卻因為程式出錯時找資料的語言隔閡而放棄了，我們覺得這是一件很可惜的事，也是我們希望能做出影響的地方。
 
-* detailed and specific, written clearly and simply
+我們希望在這個論壇上，新手可以勇於發問，沒有一個問題是不好的問題。
+也麻煩請專家們在回答問題時考慮到新手們可能是剛剛接觸程式，
+如果可以的話拜託各位把回答寫得簡單明瞭，使新手易於理解。
 
-No question is too trivial or too "newbie".
 
-But we recommend that you make use of the search services to see if your question has already been asked (perhaps even answered!) before you ask. But if you end up asking a question that has been asked before, that is fine too. Other users will hopefully edit in links to related or similar questions to help future visitors find their way.
+## 程式碼
 
-## Contact
-
-To contact the site managers please email admin@biostars.org.
-## Licensing
-
-Creative Commons License
-
-All content on Biostar is licensed via the [Creative Commons Attribution 4.0 International License][license].
-
-![](http://i.creativecommons.org/l/by/4.0/88x31.png)
-
-[license]: http://creativecommons.org/licenses/by/4.0/
-
-This license requires that you attribute the information you find here either to the author and/or to the site, depending on the scope and presentation of the information.
-
-Our community supports the [fair use policy][fair-use] when it comes to content created by users of this site.
-
-[fair-use]: http://en.wikipedia.org/wiki/Fair_use
-
-## Citing Biostar
-
-* [Parnell LD, Lindenbaum P, Shameer K, Dall'Olio GM, Swan DC, et al. 2011 BioStar: An Online Question & Answer Resource for the Bioinformatics Community. PLoS Comput Biol 7(10): e1002216. doi:10.1371/journal.pcbi.1002216][cite]
-
-[cite]: http://www.ploscompbiol.org/article/info%3Adoi%2F10.1371%2Fjournal.pcbi.1002216
-
-## Source code
-
-Biostar source code at [biostar-central][repo] repository.
+這個網站的程式碼是利用biostar.org下去改的，再次感謝biostar的工程師
+原始碼：[biostar-central][repo] 
 
 [repo]: https://github.com/ialbert/biostar-central
 
-## Bug reporting
 
-Report bugs or feature requests in the [issue tracker][issues].
-
-[issues]: https://github.com/ialbert/biostar-central/issues
 
 ## Copyright
 
