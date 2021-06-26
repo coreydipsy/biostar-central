@@ -1,11 +1,7 @@
 
-Hello! Welcome to Biostar <i class="globe icon"></i> !
+嗨!歡迎加入crew
 
-We hope you'll find the site useful and our community friendly.
+不要猶豫，勇敢的在上面提出問題吧。
+我們希望藉由討論的方式，讓大家的問題在這個平台上被解決。
 
-We encourage you to participate: **upvote** posts that you like,
-ask **questions**, write **comments** and **answers**, follow posts, bookmark content.
-You can keep up with the lates content via email (see your user account settings) or RSS feeds.
 
-Together, by sharing the know-how, personal experiences, tips and tricks of the trade we can
-become more productive and successful as scientists.

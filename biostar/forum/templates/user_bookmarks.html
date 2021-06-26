@@ -4,6 +4,6 @@
 
 {% block sidebar %}
      {% cache 500 "bookmark" request.user.pk %}
-        {% custom_feed ftype="bookmark" objs=posts title='People you have bookmarked' %}
+        {% custom_feed ftype="bookmark" objs=posts title='你放置過書籤的用戶' %}
     {% endcache %}
 {% endblock %}
