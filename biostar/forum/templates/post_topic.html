@@ -1,17 +1,17 @@
 {% extends 'post_list.html' %}
 
 {% block title %}
-    Biostar {{ topic|capfirst }}
+    Crew {{ topic|capfirst }}
 {% endblock %}
 
 {% block headtitle %}
-    Biostar {{ topic|capfirst }}
+    Crew {{ topic|capfirst }}
 {% endblock %}
 
 {% block filtermsg %}
 
     {% if not topic %}
-        <div class="ui filter message">Topic contains no posts.</div>
+        <div class="ui filter message">主題並不存在</div>
     {% endif %}
 
 {% endblock %}

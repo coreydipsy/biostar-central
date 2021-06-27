@@ -30,7 +30,7 @@
                 </td>
             </tr>
             {% empty %}
-            <div class="ui message">No votes found.</div>
+            <div class="ui message">找不到投票</div>
         {% endfor %}
         </tbody>
     </table>
@@ -43,7 +43,7 @@
 
 {% block sidebar %}
     {% cache 500 "votes" request.user.pk %}
-        {% custom_feed ftype="votes" objs=votes title="People voting on your posts" %}
+        {% custom_feed ftype="votes" objs=votes title="在你貼文投票的人" %}
     {% endcache %}
 
 {% endblock %}
