@@ -12,7 +12,7 @@ def join(*args):
 
 
 def correct_text(apps, schema_editor):
-    Job = apps.get_model('recipes', 'job')
+    Job = apps.get_model('recipes', 'Job')
 
     jobs = Job.objects.all()
     for job in jobs:

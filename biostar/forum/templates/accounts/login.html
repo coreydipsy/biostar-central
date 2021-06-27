@@ -36,7 +36,7 @@
         <div class="ui segment inputcolor socialbox">
 
             <div class="ui header">
-                <i class="user icon"></i> email登入
+                <i class="user icon"></i> Email Login
             </div>
 
             {% csrf_token %}
@@ -49,17 +49,17 @@
             </div>
 
             <div class="field">
-                <label>密碼</label>
+                <label>Password</label>
                 {{ form.password }}
             </div>
 
             <div class="field">
                 <button class="ui primary button" type="submit">
-                    <i class="sign in icon"></i>登入
+                    <i class="sign in icon"></i>Log In
                 </button>
 
                 <a class="ui right floated button" href="#" onclick="window.history.back()">
-                    <i class="chevron left icon"></i>返回
+                    <i class="chevron left icon"></i>Back
                 </a>
             </div>
 
@@ -71,8 +71,8 @@
     <div class="ui center aligned basic segment">
 
 
-        <a class="ui mini button" href="{% url 'password_reset' %}"><i class="question circle icon"></i>忘記密碼</a>
-        <a class="ui mini button" href="{% url 'signup' %}"><i class="add user icon"></i>註冊</a>
+        <a class="ui mini button" href="{% url 'password_reset' %}"><i class="question circle icon"></i>Forgot your password?</a>
+        <a class="ui mini button" href="{% url 'signup' %}"><i class="add user icon"></i>Sign up with email</a>
     </div>
 
 

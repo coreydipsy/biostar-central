@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-tw">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>登出</title>
+    <title>Log out</title>
 </head>
 <body>
-<h2>你想要登出嗎</h2>
+<h2>Do you want to log out?</h2>
 <p>
   <form method="post" action="{% url 'logout' %}" >
         {% csrf_token %}

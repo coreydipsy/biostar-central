@@ -1,19 +1,19 @@
 :root {
-    --active-item-color: #ff7700;
+    --active-item-color: #337ab7;
     --active-item-bg-color:#fbfdef;
-    --tag-color: #ff7700;
+    --tag-color: #1881c2;
     --tag-background:#ececec;
     --quetion-background:#87B13F;
     --menu-bg-color:#eff0ef;
     --has-answers-background: #1881C2;
     --tutorial-background:#87B13F;
     --menu-topics-bg-color:#1881c2;
-    --menu-header-hover: #ff7700;
+    --menu-header-hover: #337ab7;
     --menu-topic-hover: white;
     --menu-header-bg-hover:#fbfdef;
     --menu-topics-bg-hover:#fbfdef;
     --menu-topics-hover:  #2a2b2b;
-    --menu-header-color:#ff7700;
+    --menu-header-color:#337ab7;
     --job-background:#AAAAAA;
     --news-background: #555555;
     --accepted-answer-background: #1881C2;
@@ -115,6 +115,6 @@ body {
 
 
 #menu-header .add-question:hover {
-    background-color: #ffb733 !important;
+    background-color: #87B13F !important;
     color: white;
 }
