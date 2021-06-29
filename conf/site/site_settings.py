@@ -19,7 +19,7 @@ ADMINS = [
 DEFAULT_ADMIN_PASSWORD = SECRET_KEY
 
 # Set the site domain.
-SITE_DOMAIN = "188.166.240.106"
+SITE_DOMAIN = "thecrew.com.tw"
 
 SITE_ID = 1
 HTTP_PORT = ''
