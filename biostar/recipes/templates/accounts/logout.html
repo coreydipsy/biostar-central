@@ -9,13 +9,13 @@
      <form method="post" action="{% url 'logout' %}" >
 
         <div class="ui center aligned header">
-            <i class="sign out icon"></i>Do you want to log out?
+            <i class="sign out icon"></i>你想要登出嗎？
         </div>
         <div class="ui centered card inputcolor">
             <div class="ui basic segment">
                     {% csrf_token %}
-                    <button class="ui primary button" type="submit"> <i class="sign out icon"></i> Log out</button>
-                    <a class="ui right floated  button" href="/"> <i class="home icon"></i>Home</a>
+                    <button class="ui primary button" type="submit"> <i class="sign out icon"></i>登出</button>
+                    <a class="ui right floated  button" href="/"> <i class="home icon"></i>首頁</a>
             </div>
         </div>
  </form>

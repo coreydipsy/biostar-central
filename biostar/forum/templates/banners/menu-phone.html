@@ -14,37 +14,37 @@
         <i class="bars icon"><i class="dropdown icon"></i></i>
         <div class="menu">
             <a class="item {% activate tab "new" %}" href="{% url 'post_create' %}">
-                <i class=" edit icon"></i>New Post
+                <i class=" edit icon"></i>新文章
             </a>
 
             <a class="item {% activate tab "latest" %} " href="{% url 'post_list' %}">
-                <i class=" list icon"></i> Latest
+                <i class=" list icon"></i> 最新
             </a>
             <a class="item {% activate tab "open" %} " href="{% url 'post_topic' 'open' %}">
-                <i class="envelope open icon"></i> Open
+                <i class="envelope open icon"></i> 開放
             </a>
             <a class="item  {% activate tab "news" %} " href="{% url 'post_topic' 'news' %}">
-                <i class=" newspaper icon"></i> News
+                <i class=" newspaper icon"></i> 新聞
             </a>
             <a class="item {% activate tab "jobs" %} " href="{% url 'post_topic' 'jobs' %}">
-                <i class=" briefcase icon"></i> Jobs
+                <i class=" briefcase icon"></i> 尋找夥伴
             </a>
 
             <a class="item {% activate tab "tutorial" %} " href="{% url 'post_topic' 'tutorials' %}">
-                <i class=" info circle icon"></i> Tutorials
+                <i class=" info circle icon"></i> 教學
             </a>
             <a class="item {% activate tab "forum" %} " href="{% url 'post_topic' 'forum' %}">
-                <i class="file icon"></i> Forum
+                <i class="file icon"></i> 討論
             </a>
 
             <a class="item {% activate tab "tags" %} " href="{% url 'tags_list' %}">
-                <i class="tag icon"></i>Tags
+                <i class="tag icon"></i>標籤
             </a>
             <a class="item {% activate tab "planet" %} " href="{% url 'blog_list' %}">
-                <i class="rss icon"></i> Planet
+                <i class="rss icon"></i> 個人部落格
             </a>
             <a class="item {% activate tab "community" %}" href="{% url 'community_list' %}">
-                <i class=" world icon"></i>
+                <i class=" world icon"></i>社群
                 Users
             </a>
         </div>
@@ -61,30 +61,30 @@
                         <div class="ui green button"><i class="envelope icon"></i>Messages {{ counts.message_count }}
                         </div>
                     {% else %}
-                        <i class="envelope icon"></i>Messages
+                        <i class="envelope icon"></i>訊息
                     {% endif %}
                 </a>
                 <a class="item {% activate tab "myvotes" %}" href="{% url 'myvotes' %}">
                     {% if counts.vote_count %}
                         <div class="ui pink button"><i class="heart icon"></i> Votes {{ counts.vote_count }}</div>
                     {% else %}
-                        <i class="heart icon"></i> Votes
+                        <i class="heart icon"></i> 投票
                     {% endif %}
 
                 </a>
 
                 <a class="item {% activate tab "myposts" %}" href="{% url 'myposts' %}">
-                    <i class="comments icon"></i>My Posts
+                    <i class="comments icon"></i>我的貼文
                 </a>
                 <a class="item {% activate tab "mytags" %}" href="{% url 'mytags' %}">
-                    <i class="tags icon"></i> My Tags
+                    <i class="tags icon"></i> 我的標籤
                 </a>
                 <a class="item {% activate tab "following" %}" href="{% url 'following' %}">
-                    <i class="bell icon"></i> Following
+                    <i class="bell icon"></i> 追蹤中
                 </a>
 
                 <a class="item  {% activate tab "bookmarks" %}" href="{% url 'bookmarks' %}">
-                    <i class="bookmark icon"></i> Bookmarks
+                    <i class="bookmark icon"></i> 書籤
                 </a>
             </div>
         {% endif %}
@@ -100,17 +100,17 @@
                     <i class="user icon"></i> {{ user.profile.name }}{% user_icon user %}
                 </a>
                 <a class="item {% activate tab "logout" %}" href="{% url 'logout' %}">
-                    <i class="sign-out icon"></i> Logout
+                    <i class="sign-out icon"></i> 登出
                 </a>
             {% else %}
                 <a class="item {% activate tab "login" %}" href="{% url 'login' %}"><i class="sign-in icon"></i>
-                    Log In</a>
+                    登入</a>
                 <a class="item {% activate tab "signup" %}" href="{% url 'signup' %}"><i
                         class="arrow circle up icon"></i>
-                    Sign Up</a>
+                    註冊</a>
             {% endif %}
 
-            <a class="item {% activate tab "about" %}"><i class="info circle icon"></i>About
+            <a class="item {% activate tab "about" %}"><i class="info circle icon"></i>關於我們
             </a>
         </div>
 
