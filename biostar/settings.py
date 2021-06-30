@@ -29,7 +29,7 @@ ADMINS = [
     ("CrewAdmin", "admin@localhost"),
 ]
 
-DEFAULT_ADMIN_PASSWORD = "Dipsy0909"
+DEFAULT_ADMIN_PASSWORD = "admin@localhost"
 
 # Allowed CORS websites
 CORS_ORIGIN_WHITELIST = []

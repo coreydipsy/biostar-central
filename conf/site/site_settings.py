@@ -8,7 +8,7 @@ logger = logging.getLogger("biostar")
 DEBUG = True
 
 # Set your known secret key here.
-SECRET_KEY = "secretkey"
+SECRET_KEY = "CrewAdmin"
 
 # Admin users will be created automatically with DEFAULT_ADMIN_PASSWORD.
 ADMINS = [
