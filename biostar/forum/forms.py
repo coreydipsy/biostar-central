@@ -70,9 +70,9 @@ def informative_choices(choices):
     Map choices for post types to a more informative description.
     """
     mapper = {
-        Post.QUESTION: "Ask a question", Post.TUTORIAL: "Share a Tutorial",
-        Post.JOB: "Post a Job Opening", Post.FORUM: "Start a Discussion",
-        Post.TOOL: "Share a Tool", Post.NEWS: "Announce News"
+        Post.QUESTION: "問問題", Post.TUTORIAL: "發教學貼文",
+        Post.JOB: "人才招募", Post.FORUM: "開啟討論",
+        Post.TOOL: "工具分享", Post.NEWS: "新聞"
     }
     new_choices = []
     for c in choices:
@@ -119,20 +119,20 @@ class PostLongForm(forms.Form):
 
     choices = informative_choices(choices=choices)
 
-    post_type = forms.IntegerField(label="Post Type",
+    post_type = forms.IntegerField(label="文章種類",
                                    widget=forms.Select(choices=choices, attrs={'class': "ui dropdown"}),
-                                   help_text="Select a post type.")
-    title = forms.CharField(label="Post Title", max_length=200, min_length=2,
+                                   help_text="選擇文章種類")
+    title = forms.CharField(label="標題", max_length=200, min_length=2,
                             validators=[valid_title],
-                            help_text="Enter a descriptive title to promote better answers.")
-    tag_val = forms.CharField(label="Post Tags", max_length=MAX_TAG_LEN, required=True, validators=[valid_tag],
+                            help_text="詳細的標題有助於回答")
+    tag_val = forms.CharField(label="標籤", max_length=MAX_TAG_LEN, required=True, validators=[valid_tag],
 
                               widget=forms.TextInput(attrs={'id': 'tag_val'}),
-                              help_text="""Create a new tag by typing a word then adding a comma.""")
+                              help_text="""在tag後面加逗號以區分tag(僅限英文)""")
 
     content = forms.CharField(widget=forms.Textarea,
                               validators=[valid_language],
-                              min_length=MIN_CONTENT, max_length=MAX_CONTENT, label="Post Content", strip=False)
+                              min_length=MIN_CONTENT, max_length=MAX_CONTENT, label="文章內容", strip=False)
 
     def __init__(self, post=None, user=None, *args, **kwargs):
         self.post = post

@@ -22,7 +22,7 @@
 
             <div class="ui basic compact segment no-shadow">
 
-                <div class="ui center aligned medium header">Create a new post</div>
+                <div class="ui center aligned medium header">新文章</div>
 
                 <div class="ui form-wrap segment">
 
@@ -42,8 +42,7 @@
                         <div class="required field">
                             <label>{{ form.post_type.label }}</label>
                             {{ form.post_type }}
-                            <p class="muted" style="display: contents; ">{{ form.post_type.help_text }} Click here for
-                                more</p> {% include 'forms/help_text.html' %}
+                            <p class="muted" style="display: contents; ">{{ form.post_type.help_text }} 點擊以查看更多</p> {% include 'forms/help_text.html' %}
                         </div>
 
 
@@ -71,10 +70,10 @@
 
                         <div class="top-padding">
                             <button type="submit" class="ui submit green button">
-                                <i class="check icon"></i>Submit
+                                <i class="check icon"></i>送出
                             </button>
                             <a class="ui right floated button" onclick="window.history.back()">
-                                <i class="undo icon"></i>Cancel
+                                <i class="undo icon"></i>取消
                             </a>
                         </div>
 
