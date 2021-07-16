@@ -95,7 +95,8 @@ class Post(models.Model):
         (QUESTION, "Question"), (ANSWER, "Answer"), (COMMENT, "Comment"),
         #(JOB, "Job"),
         (FORUM, "Forum"), (TUTORIAL, "Tutorial"),
-        (DATA, "Data"), (PAGE, "Page"), (TOOL, "Tool"),
+        (DATA, "Data"), (PAGE, "Page"),
+        #(TOOL, "Tool"),
         #(NEWS, "News"),
         #(BLOG, "Blog"),
         (BOARD, "Bulletin Board"), (HERALD, "Herald")

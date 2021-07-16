@@ -63,7 +63,7 @@
 
                 {% if target.profile.is_moderator %}
                     <tr>
-                        <td>Role:</td>
+                        <td>身份:</td>
                         <td>{{ target.profile.get_role_display }}</td>
                     </tr>
                 {% endif %}
@@ -76,22 +76,22 @@
                 {% endif %}
 
                 <tr>
-                    <td>Status:</td>
+                    <td>狀態:</td>
                     <td>{{ target.profile.get_state_display }}</td>
                 </tr>
 
                 <tr>
-                    <td>Handle:</td>
+                    <td>ID:</td>
                     <td> <code>@{{ target.username }}</code></td>
                 </tr>
 
                 <tr>
-                    <td>Status:</td>
+                    <td>狀態:</td>
                     <td>{{ target.profile.get_state_display }}</td>
                 </tr>
 
                 <tr>
-                    <td>Reputation:</td>
+                    <td>評價:</td>
                     <td>{% user_score user=target %}</td>
                 </tr>
 
@@ -101,7 +101,7 @@
                 </tr>
 
                 <tr>
-                    <td>Joined:</td>
+                    <td>加入時間:</td>
                     <td>{{ target.profile.date_joined|timesince }}</td>
                 </tr>
 
@@ -125,12 +125,12 @@
 
 
                 <tr>
-                    <td>Last seen:</td>
+                    <td>上次上線:</td>
                     <td>{{ target.profile.last_login |timesince }}</td>
                 </tr>
 
                 <tr>
-                    <td>Location:</td>
+                    <td>所在位置:</td>
                     <td>{{ target.profile.location }}</td>
                 </tr>
 

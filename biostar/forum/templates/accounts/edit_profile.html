@@ -40,17 +40,17 @@
                 {% form_errors form %}
 
                 <div class="ui basic center aligned segment">
-                    <span class="ui header">Edit Your Profile</span>
+                    <span class="ui header">編輯個人檔案</span>
                 </div>
 
                 <div class="fields">
 
                     <div class="required form-field field">
 
-                        <label><i class="address card icon"></i> Display Name</label>
+                        <label><i class="address card icon"></i> 名稱</label>
                         {{ form.name }}
                         <div class="muted">
-                            Shown for content you create
+                            發文時使用的名稱
                         </div>
 
                     </div>
@@ -58,10 +58,10 @@
 
                     <div class="required form-field field">
 
-                        <label><i class="at icon"></i> Handle</label>
+                        <label><i class="at icon"></i> ID</label>
                         {{ form.handle }}
                         <div class="muted">
-                            People use it to to tag you: <code>@foo</code>.
+                            別人可以用來標註你 <code>@foo</code>.
                         </div>
 
                     </div>
@@ -76,17 +76,17 @@
                         <label><i class="envelope icon"></i> Email</label>
                         {{ form.email }}
                         <div class="muted">
-                            Your email
+                            你的 email
                         </div>
 
                     </div>
 
                     <div class="required form-field field">
 
-                        <label><i class="envelope icon"></i> User icon style</label>
+                        <label><i class="envelope icon"></i> 頭像</label>
                         {{ form.user_icon }}
                         <div class="muted">
-                            User icon obtained from Gravatar.
+                            選擇一個頭像
                         </div>
 
                     </div>
@@ -97,20 +97,20 @@
 
                     <div class="field">
 
-                        <label><i class="linkify icon"></i> Website</label>
+                        <label><i class="linkify icon"></i> 網站</label>
                         {{ form.website }}
                         <div class="muted">
-                            The URL to your website
+                            個人網站連結
                         </div>
 
                     </div>
 
                     <div class="field">
 
-                        <label><i class="map marker alternate icon"></i> Location</label>
+                        <label><i class="map marker alternate icon"></i> 所在位置</label>
                         {{ form.location }}
                         <div class="muted">
-                            Geographical location
+                            你的所在位置
                         </div>
 
                     </div>
@@ -122,10 +122,10 @@
                 <div class="fields">
                     <div class="field">
 
-                        <label><i class="twitter icon"></i> Twitter handle</label>
+                        <label><i class="twitter icon"></i> twitter ID</label>
                         {{ form.twitter }}
                         <div class="muted">
-                            Your Twitter id
+                            你的Twitter ID
                         </div>
 
                     </div>
@@ -135,7 +135,7 @@
                         <label><i class="google icon"></i> Google Scholar</label>
                         {{ form.scholar }}
                         <div class="muted">
-                            Your Google Scholar ID
+                            你的Google Scholar ID
                         </div>
 
                     </div>
@@ -144,7 +144,7 @@
 
                     <div class="field">
 
-                        <label><i class="bell icon"></i> Digest Preferences </label>
+                        <label><i class="bell icon"></i>  通知頻率 </label>
                         {{ form.digest_prefs }}
                         <div class="muted">
                             {{ form.digest_prefs.help_text }}
@@ -154,7 +154,7 @@
 
                     <div class="field">
 
-                        <label><i class="bell icon"></i> Notification settings </label>
+                        <label><i class="bell icon"></i> 通知設定 </label>
                         {{ form.message_prefs }}
                         <div class="muted">
                             {{ form.message_prefs.help_text }}
@@ -167,12 +167,11 @@
                 <div class="fields">
                     <div class="field">
 
-                        <label><i class="tags icon"></i> My Tags </label>
+                        <label><i class="tags icon"></i> 我的標籤 </label>
                         <div class="field">
                             {{ form.my_tags }}
                             <div class="muted">
-                                Post with tags listed here will show up in the My Tags tab.
-                                Example: <code>bwa</code>, <code>bedops</code>
+
                             </div>
                         </div>
 
@@ -183,13 +182,12 @@
                 <div class="fields">
                     <div class="field">
 
-                        <label><i class="tags icon"></i> Watched Tags </label>
+                        <label><i class="tags icon"></i>關注標籤 </label>
                         <div class="field">
                             {{ form.watched_tags }}
                             <div class="muted">
-                                Get email when a post matching the tag is posted. Limit of 10.
-                                Example: <code>minia</code>, <code>bedops</code>, <code>breakdancer</code>,
-                                <code>music</code>.
+                                每當這個有標籤的貼文出現時就會收到email通知，例如：<code>python</code>, <code>C++</code>, <code>Java</code>,
+                                <code>JavaScript</code>.
                             </div>
 
                         </div>
@@ -201,7 +199,7 @@
 
                     <div class="field">
 
-                        <label><i class="info circle icon"></i> Profile information (markdown)</label>
+                        <label><i class="info circle icon"></i> 個人檔案資訊</label>
                         {{ form.text }}
                         <div class="muted">
                             {{ form.text.help_text }}
@@ -212,11 +210,11 @@
                 </div>
 
                 <button type="submit" class="ui submit green button">
-                    <i class="save icon"></i>Submit
+                    <i class="save icon"></i>確定送出
                 </button>
 
                 <a class="ui right floated button" href="{% url "user_profile" user.profile.uid %}">
-                    <i class="undo icon"></i>Cancel
+                    <i class="undo icon"></i>取消
                 </a>
 
 

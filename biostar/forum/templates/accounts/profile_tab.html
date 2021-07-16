@@ -15,7 +15,7 @@
         <div class="ui mini buttons">
             {% if target == request.user %}
                 <a class="ui mini button" href="{% url 'edit_profile' %}">
-                    <i class="write icon"></i>Edit profile
+                    <i class="write icon"></i>編輯檔案
                 </a>
             {% endif %}
 
@@ -29,13 +29,13 @@
             {% if request.user.is_superuser or request.user.is_staff %}
                <div class="ui mini button blue disable-emails">
                     <i class="mail icon"></i>
-                    Disable Messages
+                    封鎖訊息
                 </div>
             {% endif %}
 
             {% if allow_debug %}
                 <a class="ui mini red button" href="{% url 'debug_user' %}?uid={{ target.profile.uid }}">
-                    <i class="sign in icon"></i> Log in
+                    <i class="sign in icon"></i> 登入
                 </a>
             {% endif %}
 </div>
@@ -56,25 +56,25 @@
 
                 {% if target.profile.is_moderator %}
                     <tr>
-                        <td>Role:</td>
+                        <td>身份:</td>
                         <td>{{ target.profile.get_role_display }}</td>
                     </tr>
                 {% endif %}
 
                 <tr>
-                    <td>Status:</td>
+                    <td>狀態:</td>
                     <td>{{ target.profile.get_state_display }}</td>
                 </tr>
                 {% if target.profile.handle %}
                 <tr>
-                    <td>Handle:</td>
+                    <td>ID:</td>
                     <td><code>@{{ target.profile.handle }}</code>
                     </td>
                 </tr>
                 {% endif %}
 
                 <tr>
-                    <td>Reputation:</td>
+                    <td>評價:</td>
                     <td>{{ target.profile.get_score }}</td>
                 </tr>
                 {% if target == request.user or request.user.is_superuser %}
@@ -89,7 +89,7 @@
                 {% endif %}
 
                 <tr>
-                    <td>Joined:</td>
+                    <td>加入時間:</td>
                     <td>{{ target.profile.date_joined|time_ago }}</td>
                 </tr>
 
@@ -115,18 +115,18 @@
                 {% endif %}
                 {% if target == request.user %}
                     <tr>
-                        <td>Notifications:</td>
+                        <td>通知:</td>
                         <td>{{ target.profile.get_message_prefs_display }}</td>
                     </tr>
                 {% endif %}
 
                 <tr>
-                    <td>Last seen:</td>
+                    <td>上次上線:</td>
                     <td>{{ target.profile.last_login |time_ago }}</td>
                 </tr>
                 {% if show_info %}
                     <tr>
-                        <td>Location:</td>
+                        <td>所在位置:</td>
                         <td>{{ target.profile.location }}</td>
                     </tr>
                 {% endif %}
