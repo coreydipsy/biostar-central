@@ -21,14 +21,14 @@
                 <i class=" list icon"></i> 最新
             </a>
             <a class="item {% activate tab "open" %} " href="{% url 'post_topic' 'open' %}">
-                <i class="envelope open icon"></i> 開放
+                <i class="envelope open icon"></i> 未答
             </a>
-            <a class="item  {% activate tab "news" %} " href="{% url 'post_topic' 'news' %}">
+            <!--<a class="item  {% activate tab "news" %} " href="{% url 'post_topic' 'news' %}">
                 <i class=" newspaper icon"></i> 新聞
             </a>
             <a class="item {% activate tab "jobs" %} " href="{% url 'post_topic' 'jobs' %}">
                 <i class=" briefcase icon"></i> 尋找夥伴
-            </a>
+            </a>-->
 
             <a class="item {% activate tab "tutorial" %} " href="{% url 'post_topic' 'tutorials' %}">
                 <i class=" info circle icon"></i> 教學
@@ -40,9 +40,9 @@
             <a class="item {% activate tab "tags" %} " href="{% url 'tags_list' %}">
                 <i class="tag icon"></i>標籤
             </a>
-            <a class="item {% activate tab "planet" %} " href="{% url 'blog_list' %}">
+            <!--<a class="item {% activate tab "planet" %} " href="{% url 'blog_list' %}">
                 <i class="rss icon"></i> 個人部落格
-            </a>
+            </a>-->
             <a class="item {% activate tab "community" %}" href="{% url 'community_list' %}">
                 <i class=" world icon"></i>社群
                 Users

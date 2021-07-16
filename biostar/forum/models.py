@@ -93,9 +93,12 @@ class Post(models.Model):
     # Valid post types.
     TYPE_CHOICES = [
         (QUESTION, "Question"), (ANSWER, "Answer"), (COMMENT, "Comment"),
-        (JOB, "Job"), (FORUM, "Forum"), (TUTORIAL, "Tutorial"),
-        (DATA, "Data"), (PAGE, "Page"), (TOOL, "Tool"), (NEWS, "News"),
-        (BLOG, "Blog"), (BOARD, "Bulletin Board"), (HERALD, "Herald")
+        #(JOB, "Job"),
+        (FORUM, "Forum"), (TUTORIAL, "Tutorial"),
+        (DATA, "Data"), (PAGE, "Page"), (TOOL, "Tool"),
+        #(NEWS, "News"),
+        #(BLOG, "Blog"),
+        (BOARD, "Bulletin Board"), (HERALD, "Herald")
     ]
     TOP_LEVEL = {QUESTION, JOB, FORUM, BLOG, TUTORIAL, TOOL, NEWS, HERALD}
 
