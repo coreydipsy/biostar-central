@@ -75,7 +75,7 @@ def informative_choices(choices):
     #     Post.TOOL: "工具分享", Post.NEWS: "新聞"
     # }
     mapper = {
-        Post.QUESTION: "問問題", Post.TUTORIAL: "教學貼文",
+        Post.QUESTION: "問問題", Post.TUTORIAL: "程式題目討論",
         Post.FORUM: "開啟討論"
     }
     new_choices = []
