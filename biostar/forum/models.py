@@ -94,7 +94,7 @@ class Post(models.Model):
     TYPE_CHOICES = [
         (QUESTION, "Question"), (ANSWER, "Answer"), (COMMENT, "Comment"),
         #(JOB, "Job"),
-        (FORUM, "Forum"), (TUTORIAL, "Tutorial"),
+        (FORUM, "討論"), (TUTORIAL, "程式題目"),
         (DATA, "Data"), (PAGE, "Page"),
         #(TOOL, "Tool"),
         #(NEWS, "News"),
