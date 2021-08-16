@@ -534,12 +534,12 @@ def get_wording(filtered, prefix="Sort by:", default=""):
     Get the naming and icons for limits and ordering.
     """
 
-    display = dict(all="all time", week="this week", month="this month",
-                   year="this year", rank="Rank", views="Views", today="today",
-                   replies="replies", votes="Votes", visit="recent visit",
-                   reputation="reputation", joined="date joined", activity="activity level",
-                   rsent="oldest to newest ", sent="newest to oldest",
-                   rep="sender reputation", tagged="tagged")
+    display = dict(all="全部", week="本週", month="本月",
+                   year="今年", rank="排名", views="觀看數", today="今天",
+                   replies="回覆", votes="票數", visit="最近",
+                   reputation="評價", joined="加入時間", activity="等級",
+                   rsent="最舊到最新", sent="最新到最舊",
+                   rep="傳送者評價", tagged="被標註")
     if display.get(filtered):
         displayed = display[filtered]
     else:
